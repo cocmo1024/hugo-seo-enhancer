@@ -1,3 +1,3 @@
-module hugo-seo-enhancer
+module github.com/cocmo1024/hugo-seo-enhancer
 
-go 1.24.4
+go 1.20
