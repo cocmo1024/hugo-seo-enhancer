@@ -1,0 +1,7 @@
+{{- /* ===========================
+      ✅ Canonical URL 自动输出模块
+      来源模块：hugo-seo-enhancer
+     =========================== */ -}}
+
+{{- $canonical := .Params.canonicalURL | default .Permalink -}}
+<link rel="canonical" href="{{ $canonical }}">

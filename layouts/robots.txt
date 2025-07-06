@@ -1,0 +1,9 @@
+{{- /* ✅ 动态输出 robots.txt（自动区分环境） */ -}}
+User-agent: *
+{{ if eq hugo.Environment "production" -}}
+Disallow:
+{{ else -}}
+Disallow: /
+{{ end }}
+
+Sitemap: {{ .Site.BaseURL }}sitemap.xml

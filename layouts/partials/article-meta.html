@@ -1,0 +1,18 @@
+{{- /* ===========================
+      ✅ 文章元信息展示模块
+      来源模块：hugo-seo-enhancer
+     =========================== */ -}}
+
+<p class="article-meta">
+  {{- with .Date }}
+    {{ .Format "Jan 2, 2006" }}     {{/* 英文格式：July 4, 2024 */}}
+  {{- end -}}
+
+  {{- with .ReadingTime }}
+    · {{ . }} min read
+  {{- end -}}
+
+  {{- with .Params.author }}
+    · {{ . }}
+  {{- end }}
+</p>
