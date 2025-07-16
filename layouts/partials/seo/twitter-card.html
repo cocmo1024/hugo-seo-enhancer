@@ -1,0 +1,24 @@
+{{- /* ===========================
+     ✅ Twitter Card 标签输出（增强型）
+     来源模块：hugo-seo-enhancer
+     =========================== */ -}}
+
+{{- $title := .Title | default site.Title }}
+{{- $desc := .Params.description | default .Summary | default site.Params.description }}
+
+{{- $image := "" }}
+{{- if isset .Params "images" }}
+  {{- $image = index .Params.images 0 | absURL }}
+{{- else if and (isset site.Params "images") (gt (len site.Params.images) 0) }}
+  {{- $image = index site.Params.images 0 | absURL }}
+{{- end }}
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ $title | plainify | safeHTMLAttr }}">
+<meta name="twitter:description" content="{{ $desc | plainify | safeHTMLAttr }}">
+<meta name="twitter:image" content="{{ $image | safeURL }}">
+
+{{- with site.Params.social.twitter }}
+  <meta name="twitter:site" content="@{{ . | safeHTMLAttr }}">
+  <meta name="twitter:creator" content="@{{ . | safeHTMLAttr }}">
+{{- end }}

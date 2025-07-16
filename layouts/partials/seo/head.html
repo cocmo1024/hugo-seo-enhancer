@@ -1,0 +1,12 @@
+{{- /* ============================
+     ✅ SEO Enhancer 主入口
+     模块路径：hugo-seo-enhancer/layouts/partials/seo/head.html
+     说明：统一调用所有子模块，输出到 <head> 中
+   ============================ */ -}}
+<!-- 必须保留这句，以确保 PaperMod CSS 被加载 -->
+{{ partial "head.html" . }}
+{{ partial "seo/meta.html" . }}
+{{ partial "seo/canonical.html" . }}
+{{ partial "seo/opengraph.html" . }}
+{{ partial "seo/twitter-card.html" . }}
+{{ partial "seo/jsonld.html" . }}

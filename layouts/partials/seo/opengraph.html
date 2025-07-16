@@ -1,0 +1,24 @@
+{{- /* ===========================
+     ✅ OpenGraph 标签输出（增强型）
+     来源模块：hugo-seo-enhancer
+     =========================== */ -}}
+
+{{- $title := .Title | default site.Title }}
+{{- $desc := .Params.description | default .Summary | default site.Params.description }}
+
+{{- $image := "" }}
+{{- if isset .Params "images" }}
+  {{- $image = index .Params.images 0 | absURL }}
+{{- else if and (isset site.Params "images") (gt (len site.Params.images) 0) }}
+  {{- $image = index site.Params.images 0 | absURL }}
+{{- end }}
+
+{{- $url := .Permalink }}
+{{- $type := cond .IsPage "article" "website" }}
+
+<meta property="og:title" content="{{ $title | plainify | safeHTMLAttr }}">
+<meta property="og:description" content="{{ $desc | plainify | safeHTMLAttr }}">
+<meta property="og:image" content="{{ $image | safeURL }}">
+<meta property="og:url" content="{{ $url | safeURL }}">
+<meta property="og:type" content="{{ $type }}">
+<meta property="og:site_name" content="{{ site.Title | plainify | safeHTMLAttr }}">

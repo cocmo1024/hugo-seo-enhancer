@@ -1,0 +1,45 @@
+{{- /* ===========================
+     ✅ JSON-LD 结构化数据输出
+     来源模块：hugo-seo-enhancer
+     =========================== */ -}}
+
+{{- $author := .Params.author | default site.Params.author }}
+{{- $title := .Title | default site.Title }}
+{{- $desc := .Params.description | default .Summary | default site.Params.description }}
+
+{{- $image := "" }}
+{{- if isset .Params "images" }}
+  {{- $image = index .Params.images 0 | absURL }}
+{{- else if and (isset site.Params "images") (gt (len site.Params.images) 0) }}
+  {{- $image = index site.Params.images 0 | absURL }}
+{{- end }}
+
+{{- $url := .Permalink }}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": {{ $url | jsonify }}
+  },
+  "headline": {{ $title | jsonify }},
+  "description": {{ $desc | jsonify }},
+  "image": {{ $image | jsonify }},
+  "author": {
+    "@type": "Person",
+    "name": {{ $author | jsonify }}
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": {{ site.Title | jsonify }},
+    "logo": {
+      "@type": "ImageObject",
+      "url": {{ site.Params.publisher.logo | default (index site.Params.images 0) | absURL | jsonify }}
+    }
+  },
+  "datePublished": "{{ .PublishDate | default .Date | time.Format "2006-01-02T15:04:05Z07:00" }}",
+  "dateModified": "{{ .Lastmod | time.Format "2006-01-02T15:04:05Z07:00" }}"
+}
+</script>

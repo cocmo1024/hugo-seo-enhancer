@@ -1,0 +1,26 @@
+{{- /* ===========================
+     ✅ Meta: 基础 SEO 元信息（增强型）
+     来源模块：hugo-seo-enhancer
+     =========================== */ -}}
+
+{{- with .Params.description }}
+  <meta name="description" content="{{ . | plainify | safeHTMLAttr }}">
+{{- else }}
+  {{- with .Summary }}
+    <meta name="description" content="{{ . | plainify | safeHTMLAttr }}">
+  {{- else }}
+    {{- with site.Params.description }}
+      <meta name="description" content="{{ . | plainify | safeHTMLAttr }}">
+    {{- end }}
+  {{- end }}
+{{- end }}
+
+{{- $kw := .Params.keywords }}
+{{- if and (isset .Params "keywords") (reflect.IsSlice $kw) }}
+  <meta name="keywords" content="{{ delimit $kw ", " | safeHTMLAttr }}">
+{{- else if and (isset site.Params "keywords") (reflect.IsSlice site.Params.keywords) }}
+  <meta name="keywords" content="{{ delimit site.Params.keywords ", " | safeHTMLAttr }}">
+{{- end }}
+
+{{- $robots := .Params.robots | default site.Params.robots | default "index, follow" }}
+<meta name="robots" content="{{ $robots | plainify | safeHTMLAttr }}">

@@ -1,0 +1,11 @@
+{{- /* ============================
+     ✅ Canonical 链接处理
+     优先使用 .Params.canonical 设置，否则 fallback 当前 Permalink
+   ============================ */ -}}
+
+{{- $canonical := .Params.canonical | default .Permalink }}
+
+{{- if $canonical }}
+<link rel="canonical" href="{{ $canonical | safeURL }}">
+{{- end }}
+
