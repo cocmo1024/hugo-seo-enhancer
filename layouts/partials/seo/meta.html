@@ -2,7 +2,7 @@
      ✅ Meta: 基础 SEO 元信息（增强型）
      来源模块：hugo-seo-enhancer
      =========================== */ -}}
-
+{{/* 
 {{- with .Params.description }}
   <meta name="description" content="{{ . | plainify | safeHTMLAttr }}">
 {{- else }}
@@ -24,3 +24,4 @@
 
 {{- $robots := .Params.robots | default site.Params.robots | default "index, follow" }}
 <meta name="robots" content="{{ $robots | plainify | safeHTMLAttr }}">
+*/}}
